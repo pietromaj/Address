@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<input type="text" onKeypress="myFunction()" id="input-box">
+
+<h1>Listing Post Addresses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Postcode</th>
+      <th>City</th>
+      <th>Street</th>
+      <th>Number</th>
+      <th>Range</th>
+      <th>Flat</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @post_addresses.each do |post_address| %>
+      <tr>
+        <td><%= post_address.postcode %></td>
+        <td><%= post_address.city %></td>
+        <td><%= post_address.street %></td>
+        <td><%= post_address.number %></td>
+        <td><%= post_address.range %></td>
+        <td><%= post_address.flat %></td>
+        <td><%= link_to 'Show', post_address %></td>
+        <td><%= link_to 'Edit', edit_post_address_path(post_address) %></td>
+        <td><%= link_to 'Destroy', post_address, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h3>Import Adresses</h3>
+<%= form_tag import_post_addresses_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Upload file" %>
+<% end %>
+
+<%= link_to 'New Post address', new_post_address_path %>
